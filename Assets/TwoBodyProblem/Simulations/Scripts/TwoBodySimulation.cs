@@ -35,17 +35,25 @@ public class TwoBodySimulation : Simulation
     private float reducedMass;
     [HideInInspector] public Vector3 r;  // r1 - r2
     [HideInInspector] public Vector3 v;  // time derivative of r
+    [HideInInspector] public float theta;  // angular coordinate in the orbital plane
 
-    // Conserved quantites
+    // Conserved quantites (evaluated in CM frame)
     private float energy;
     private float period;
-    [HideInInspector] public float angularMomentum;
+    private Vector3 angularMomentum;
+    private float magnitudeL;
+    private float semiMajorAxis;
+    private float eccentricity;
+    private float initTheta;
 
     // Properties
     public float M => totalMass;
     public float Mu => reducedMass;
     public float Energy => energy;
     public float Period => period;
+    public float L => magnitudeL;
+    public float SemiMajorAxis => semiMajorAxis;
+    public float Eccentricity => eccentricity;
 
     private void Awake()
     {
@@ -56,20 +64,37 @@ public class TwoBodySimulation : Simulation
             return;
         }
 
+        // Place the simulation at the center of mass
+        totalMass = mass1 + mass2;
+        initPositionCM = (mass1 * initPosition1 + mass2 * initPosition2) / totalMass;
+        initVelocityCM = (mass1 * initVelocity1 + mass2 * initVelocity2) / totalMass;
+        transform.position = initPositionCM;
+
+        // Create all objects
         prefabs.InstantiateAllPrefabs();
 
+        // Set body properties and positions relative to the CM (i.e. the origin)
         body1 = prefabs.body1;
-        body1.localScale = 2 * Mathf.Pow(3f * mass1 / 4f / Mathf.PI, 0.333f) * Vector3.one;
-        body1.position = initPosition1;
+        float body1Scale = 2 * Mathf.Pow(3f * mass1 / 4f / Mathf.PI, 0.333f);
+        body1.localScale = body1Scale * Vector3.one;
+        body1.localPosition = initPosition1;
+        Transform halo = body1.Find("Halo");
+        if (halo)
+        {
+            if (halo.TryGetComponent(out Light light))
+            {
+                light.range = 1.35f * body1Scale;
+            }
+        }
 
         body2 = prefabs.body2;
         body2.localScale = 2 * Mathf.Pow(3f * mass2 / 4f / Mathf.PI, 0.333f) * Vector3.one;
-        body2.position = initPosition2;
+        body2.localPosition = initPosition2;
 
         if (prefabs.centerOfMass)
         {
+            // Center of mass marker should always be at the origin
             prefabs.centerOfMass.localScale = 0.5f * Vector3.one;
-            prefabs.UpdateCenterOfMass(CenterOfMassPosition());
         }
 
         if (oneBodySim)
@@ -82,28 +107,80 @@ public class TwoBodySimulation : Simulation
 
     private void Start()
     {
-        Vector3 forward = -Vector3.Cross(r, v).normalized;
+        // Local coordinate system
+        Vector3 zHat = -angularMomentum.normalized;
+        Vector3 xHat = Quaternion.AngleAxis(-initTheta, zHat) * (-r.normalized);
+        Vector3 yHat = Vector3.Cross(zHat, xHat);
+
+        Vector3 positionCM = transform.position;
 
         if (prefabs.angularMomentumVector)
         {
-            Debug.Log("Setting L vector");
-            Vector3 tailPosition = CenterOfMassPosition();
-            prefabs.angularMomentumVector.SetPositions(tailPosition, tailPosition - 3f * forward);
+            prefabs.angularMomentumVector.SetPositions(positionCM, positionCM - 3f * zHat);
             prefabs.angularMomentumVector.Redraw();
         }
 
         if (prefabs.orbitalPlaneDark)
         {
-            prefabs.orbitalPlaneDark.forward = forward;
-            prefabs.orbitalPlaneDark.position = CenterOfMassPosition() + 0.1f * forward;
-            Debug.Log(Vector3.Cross(r, v).normalized);
+            prefabs.orbitalPlaneDark.forward = zHat;
+            prefabs.orbitalPlaneDark.position = positionCM + 0.05f * zHat;
         }
 
         if (prefabs.orbitalPlaneLight)
         {
-            prefabs.orbitalPlaneLight.forward = forward;
-            prefabs.orbitalPlaneLight.position = CenterOfMassPosition() + 0.1f * forward;
-            Debug.Log(Vector3.Cross(r, v).normalized);
+            prefabs.orbitalPlaneLight.forward = zHat;
+            prefabs.orbitalPlaneLight.position = positionCM + 0.05f * zHat;
+        }
+
+        int numSteps = 360;
+        float a = SemiMajorAxis;
+        float e = Eccentricity;
+
+        if (prefabs.orbit1)
+        {
+            Vector3[] positions = new Vector3[numSteps];
+            for (int i = 0; i < numSteps; i++)
+            {
+                float theta = i * 2f * Mathf.PI / numSteps;
+                float r = a * (1f - e * e) / (1f + e * Mathf.Cos(theta));
+                float r1 = mass2 / M * r;
+                positions[i] = r1 * (Mathf.Cos(theta) * xHat + Mathf.Sin(theta) * yHat);
+            }
+
+            prefabs.orbit1.positionCount = numSteps;
+            prefabs.orbit1.SetPositions(positions);
+            prefabs.orbit1.loop = true;
+        }
+
+        if (prefabs.orbit2)
+        {
+            Vector3[] positions = new Vector3[numSteps];
+            for (int i = 0; i < numSteps; i++)
+            {
+                float theta = i * 2f * Mathf.PI / numSteps;
+                float r = a * (1f - e * e) / (1f + e * Mathf.Cos(theta));
+                float r2 = -mass1 / M * r;
+                positions[i] = r2 * (Mathf.Cos(theta) * xHat + Mathf.Sin(theta) * yHat);
+            }
+
+            prefabs.orbit2.positionCount = numSteps;
+            prefabs.orbit2.SetPositions(positions);
+            prefabs.orbit2.loop = true;
+        }
+
+        if (prefabs.orbit3)
+        {
+            Vector3[] positions = new Vector3[numSteps];
+            for (int i = 0; i < numSteps; i++)
+            {
+                float theta = i * 2f * Mathf.PI / numSteps;
+                float r = a * (1f - e * e) / (1f + e * Mathf.Cos(theta));
+                positions[i] = r * (Mathf.Cos(theta) * xHat + Mathf.Sin(theta) * yHat);
+            }
+
+            prefabs.orbit3.positionCount = numSteps;
+            prefabs.orbit3.SetPositions(positions);
+            prefabs.orbit3.loop = true;
         }
     }
 
@@ -119,14 +196,17 @@ public class TwoBodySimulation : Simulation
             resetTimer = 0;
             r = initPosition1 - initPosition2;
             v = initVelocity1 - initVelocity2;
-            body1.position = CenterOfMassPosition() + (mass2 / M * r);
-            body2.position = CenterOfMassPosition() - (mass1 / M * r);
+            body1.localPosition = mass2 / M * r;
+            body2.localPosition = -mass1 / M * r;
+
+            theta = initTheta;
         }
 
-        // Compute the new center of mass position
         time += Time.fixedDeltaTime;
         resetTimer += Time.fixedDeltaTime;
-        Vector3 R = CenterOfMassPosition(time);
+
+        // Move the simulation to the new CM position
+        transform.position = CenterOfMassPosition(time);
 
         // Solve the equation of motion for r
         float substep = Time.fixedDeltaTime / numSubsteps;
@@ -135,14 +215,20 @@ public class TwoBodySimulation : Simulation
             StepForward(substep);
         }
 
-        // Update each body's position
-        body1.position = R + (mass2 / M * r);
-        body2.position = R - (mass1 / M * r);
+        if (energy < 0)
+        {
+            StepForwardThetaR(Time.fixedDeltaTime);
+        }
 
-        // Let TwoBodyPrefabs know to update its objects
-        prefabs.UpdateCenterOfMass(R);
-        prefabs.UpdateVectors(R);
+        //Debug.Log("theta = " + Mathf.Atan2(r.y, r.x) * Mathf.Rad2Deg);
+        //Debug.Log("theta / 2pi = " + theta / 2 / Mathf.PI);
 
+        // Update each body's position in the CM frame
+        body1.localPosition = mass2 / M * r;
+        body2.localPosition = -mass1 / M * r;
+
+        // Let TwoBodyPrefabs know how to update its vectors
+        prefabs.UpdateVectors(Vector3.zero);
 
         // Update the equivalent single body if assigned
         if (oneBodySim)
@@ -164,6 +250,12 @@ public class TwoBodySimulation : Simulation
         v += deltaV;
     }
 
+    private void StepForwardThetaR(float deltaTime)
+    {
+        float angularSpeed = L / Mu / r.sqrMagnitude;
+        theta += angularSpeed * deltaTime;
+    }
+
     public override void Reset()
     {
         time = 0;
@@ -172,16 +264,16 @@ public class TwoBodySimulation : Simulation
         r = initPosition1 - initPosition2;
         v = initVelocity1 - initVelocity2;
 
-        // Compute conserved quantities
-        totalMass = mass1 + mass2;
+        // Compute conserved quantities (in CM frame)
         reducedMass = mass1 * mass2 / totalMass;
-        energy = 0.5f * reducedMass * v.sqrMagnitude - newtonG * mass1 * mass2 / r.magnitude;
+        energy = 0.5f * reducedMass * v.sqrMagnitude - newtonG * reducedMass * totalMass / r.magnitude;
+        angularMomentum = reducedMass * Vector3.Cross(r, v);
+        magnitudeL = angularMomentum.magnitude;
 
-        // Save the center of mass starting position and velocity
-        initPositionCM = (mass1 * initPosition1 + mass2 * initPosition2) / totalMass;
-        initVelocityCM = (mass1 * initVelocity1 + mass2 * initVelocity2) / totalMass;
-
-        // Compute the orbital period
+        // Compute orbital properties
+        semiMajorAxis = -0.5f * newtonG * reducedMass * totalMass / energy;
+        eccentricity = Mathf.Sqrt(1f + 2f * energy * Mathf.Pow(magnitudeL / newtonG / reducedMass / totalMass, 2) / reducedMass);
+        // Period and initial theta
         if (energy >= 0)
         {
             // Unbound orbit
@@ -190,13 +282,19 @@ public class TwoBodySimulation : Simulation
         else
         {
             // Bound orbit
-            float a = -0.5f * newtonG * mass1 * mass2 / energy;
+            float a = semiMajorAxis;
             period = 2 * Mathf.PI * Mathf.Sqrt(a * a * a / newtonG / totalMass);
+
+            float e = eccentricity;
+            initTheta = Mathf.Acos(((a * (1f - e * e) / r.magnitude) - 1f) / e);
+            theta = initTheta;
         }
 
         Debug.Log("Period is " + Period + " s");
         Debug.Log("CM is at " + initPositionCM);
         Debug.Log("CM v is " + initVelocityCM);
+        Debug.Log("e is " + eccentricity);
+        Debug.Log("theta0 is " + initTheta * Mathf.Rad2Deg);
     }
 
     // Center of mass position at any time
@@ -205,9 +303,78 @@ public class TwoBodySimulation : Simulation
         return initPositionCM + initVelocityCM * time;
     }
 
-    // Center of mass position at the current time
-    public Vector3 CenterOfMassPosition()
+    public void ChangeMassRatio(float massRatio)
     {
-        return CenterOfMassPosition(time);
+        mass1 = massRatio * mass2;
+        float scale = 2 * Mathf.Pow(3f * mass1 / 4f / Mathf.PI, 0.333f);
+        body1.localScale = scale * Vector3.one;
+        Transform halo = body1.Find("Halo");
+        if (halo)
+        {
+            if (halo.TryGetComponent(out Light light))
+            {
+                light.range = 1.35f * scale;
+            }
+        }
+
+        // Place the simulation at the center of mass
+        totalMass = mass1 + mass2;
+        initPositionCM = (mass1 * initPosition1 + mass2 * initPosition2) / totalMass;
+        initVelocityCM = (mass1 * initVelocity1 + mass2 * initVelocity2) / totalMass;
+        Vector3 deltaPosition = transform.position - initPositionCM;
+        transform.position = initPositionCM;
+        body1.localPosition = mass2 / M * r;
+        body2.localPosition = -mass1 / M * r;
+
+        if (prefabs.orbitalPlaneLight)
+        {
+            prefabs.orbitalPlaneLight.Translate(deltaPosition);
+        }
+
+        if (prefabs.orbitalPlaneDark)
+        {
+            prefabs.orbitalPlaneDark.Translate(deltaPosition);
+        }
+
+        // Local coordinate system
+        Vector3 zHat = -angularMomentum.normalized;
+        Vector3 xHat = Quaternion.AngleAxis(-initTheta, zHat) * (-r.normalized);
+        Vector3 yHat = Vector3.Cross(zHat, xHat);
+
+        int numSteps = 360;
+        float a = SemiMajorAxis;
+        float e = Eccentricity;
+
+        if (prefabs.orbit1)
+        {
+            Vector3[] positions = new Vector3[numSteps];
+            for (int i = 0; i < numSteps; i++)
+            {
+                float theta = i * 2f * Mathf.PI / numSteps;
+                float r = a * (1f - e * e) / (1f + e * Mathf.Cos(theta));
+                float r1 = mass2 / M * r;
+                positions[i] = r1 * (Mathf.Cos(theta) * xHat + Mathf.Sin(theta) * yHat);
+            }
+
+            prefabs.orbit1.positionCount = numSteps;
+            prefabs.orbit1.SetPositions(positions);
+            prefabs.orbit1.loop = true;
+        }
+
+        if (prefabs.orbit2)
+        {
+            Vector3[] positions = new Vector3[numSteps];
+            for (int i = 0; i < numSteps; i++)
+            {
+                float theta = i * 2f * Mathf.PI / numSteps;
+                float r = a * (1f - e * e) / (1f + e * Mathf.Cos(theta));
+                float r2 = -mass1 / M * r;
+                positions[i] = r2 * (Mathf.Cos(theta) * xHat + Mathf.Sin(theta) * yHat);
+            }
+
+            prefabs.orbit2.positionCount = numSteps;
+            prefabs.orbit2.SetPositions(positions);
+            prefabs.orbit2.loop = true;
+        }
     }
 }

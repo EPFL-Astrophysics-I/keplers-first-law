@@ -274,11 +274,11 @@ public class TwoBodySimulation : Simulation
             theta = initTheta;
         }
 
-        Debug.Log("Period is " + Period + " s");
-        Debug.Log("CM is at " + initPositionCM);
-        Debug.Log("CM v is " + initVelocityCM);
-        Debug.Log("e is " + eccentricity);
-        Debug.Log("theta0 is " + initTheta * Mathf.Rad2Deg);
+        //Debug.Log("Period is " + Period + " s");
+        //Debug.Log("CM is at " + initPositionCM);
+        //Debug.Log("CM v is " + initVelocityCM);
+        //Debug.Log("e is " + eccentricity);
+        //Debug.Log("theta0 is " + initTheta * Mathf.Rad2Deg);
     }
 
     // Center of mass position at any time

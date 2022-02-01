@@ -55,6 +55,11 @@ public class TwoBodySimulation : Simulation
     public float SemiMajorAxis => semiMajorAxis;
     public float Eccentricity => eccentricity;
 
+    // Coordinate system with angular momentum along the z-axis and x, y in the orbital plane
+    private Vector3 xHat = Vector3.right;
+    private Vector3 yHat = Vector3.up;
+    private Vector3 zHat = Vector3.forward;
+
     private void Awake()
     {
         if (!TryGetComponent(out prefabs))
@@ -103,85 +108,47 @@ public class TwoBodySimulation : Simulation
         }
 
         Reset();
+
+        // Orbital plane coordinate system
+        zHat = angularMomentum.normalized;
+        //xHat = Quaternion.AngleAxis(-initTheta, zHat) * r.normalized;
+        xHat = -r.normalized;
+        yHat = Vector3.Cross(zHat, xHat);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawRay(transform.position, zHat);
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, xHat);
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(transform.position, yHat);
     }
 
     private void Start()
     {
-        // Local coordinate system
-        Vector3 zHat = -angularMomentum.normalized;
-        Vector3 xHat = Quaternion.AngleAxis(-initTheta, zHat) * (-r.normalized);
-        Vector3 yHat = Vector3.Cross(zHat, xHat);
-
         Vector3 positionCM = transform.position;
 
         if (prefabs.angularMomentumVector)
         {
-            prefabs.angularMomentumVector.SetPositions(positionCM, positionCM - 3f * zHat);
+            prefabs.angularMomentumVector.SetPositions(positionCM, positionCM + 3f * zHat);
             prefabs.angularMomentumVector.Redraw();
         }
 
         if (prefabs.orbitalPlaneDark)
         {
             prefabs.orbitalPlaneDark.forward = zHat;
-            prefabs.orbitalPlaneDark.position = positionCM + 0.05f * zHat;
+            prefabs.orbitalPlaneDark.position = positionCM - 0.05f * zHat;
         }
 
         if (prefabs.orbitalPlaneLight)
         {
             prefabs.orbitalPlaneLight.forward = zHat;
-            prefabs.orbitalPlaneLight.position = positionCM + 0.05f * zHat;
+            prefabs.orbitalPlaneLight.position = positionCM - 0.05f * zHat;
         }
 
-        int numSteps = 360;
-        float a = SemiMajorAxis;
-        float e = Eccentricity;
-
-        if (prefabs.orbit1)
-        {
-            Vector3[] positions = new Vector3[numSteps];
-            for (int i = 0; i < numSteps; i++)
-            {
-                float theta = i * 2f * Mathf.PI / numSteps;
-                float r = a * (1f - e * e) / (1f + e * Mathf.Cos(theta));
-                float r1 = mass2 / M * r;
-                positions[i] = r1 * (Mathf.Cos(theta) * xHat + Mathf.Sin(theta) * yHat);
-            }
-
-            prefabs.orbit1.positionCount = numSteps;
-            prefabs.orbit1.SetPositions(positions);
-            prefabs.orbit1.loop = true;
-        }
-
-        if (prefabs.orbit2)
-        {
-            Vector3[] positions = new Vector3[numSteps];
-            for (int i = 0; i < numSteps; i++)
-            {
-                float theta = i * 2f * Mathf.PI / numSteps;
-                float r = a * (1f - e * e) / (1f + e * Mathf.Cos(theta));
-                float r2 = -mass1 / M * r;
-                positions[i] = r2 * (Mathf.Cos(theta) * xHat + Mathf.Sin(theta) * yHat);
-            }
-
-            prefabs.orbit2.positionCount = numSteps;
-            prefabs.orbit2.SetPositions(positions);
-            prefabs.orbit2.loop = true;
-        }
-
-        if (prefabs.orbit3)
-        {
-            Vector3[] positions = new Vector3[numSteps];
-            for (int i = 0; i < numSteps; i++)
-            {
-                float theta = i * 2f * Mathf.PI / numSteps;
-                float r = a * (1f - e * e) / (1f + e * Mathf.Cos(theta));
-                positions[i] = r * (Mathf.Cos(theta) * xHat + Mathf.Sin(theta) * yHat);
-            }
-
-            prefabs.orbit3.positionCount = numSteps;
-            prefabs.orbit3.SetPositions(positions);
-            prefabs.orbit3.loop = true;
-        }
+        DrawOrbits();
     }
 
     private void FixedUpdate()
@@ -209,19 +176,32 @@ public class TwoBodySimulation : Simulation
         transform.position = CenterOfMassPosition(time);
 
         // Solve the equation of motion for r
-        float substep = Time.fixedDeltaTime / numSubsteps;
-        for (int i = 1; i <= numSubsteps; i++)
-        {
-            StepForward(substep);
-        }
+        //float substep = Time.fixedDeltaTime / numSubsteps;
+        //for (int i = 1; i <= numSubsteps; i++)
+        //{
+        //    StepForward(substep);
+        //}
 
+        // Bound orbits
         if (energy < 0)
         {
-            StepForwardThetaR(Time.fixedDeltaTime);
+            // Solve the equation of motion for theta
+            float substep = Time.fixedDeltaTime / numSubsteps;
+            for (int i = 0; i < numSubsteps; i++)
+            {
+                StepForwardThetaR(substep);
+            }
+            
         }
-
-        //Debug.Log("theta = " + Mathf.Atan2(r.y, r.x) * Mathf.Rad2Deg);
-        //Debug.Log("theta / 2pi = " + theta / 2 / Mathf.PI);
+        else
+        {
+            // Solve the equation of motion for r
+            float substep = Time.fixedDeltaTime / numSubsteps;
+            for (int i = 1; i <= numSubsteps; i++)
+            {
+                StepForward(substep);
+            }
+        }
 
         // Update each body's position in the CM frame
         body1.localPosition = mass2 / M * r;
@@ -252,8 +232,12 @@ public class TwoBodySimulation : Simulation
 
     private void StepForwardThetaR(float deltaTime)
     {
-        float angularSpeed = L / Mu / r.sqrMagnitude;
+        float angularSpeed = -L / Mu / r.sqrMagnitude;
         theta += angularSpeed * deltaTime;
+        float a = SemiMajorAxis;
+        float e = Eccentricity;
+        float rMagnitude = a * (1f - e * e) / (1f + e * Mathf.Cos(theta));
+        r = rMagnitude * (Mathf.Cos(theta) * xHat + Mathf.Sin(theta) * yHat);
     }
 
     public override void Reset()
@@ -267,7 +251,7 @@ public class TwoBodySimulation : Simulation
         // Compute conserved quantities (in CM frame)
         reducedMass = mass1 * mass2 / totalMass;
         energy = 0.5f * reducedMass * v.sqrMagnitude - newtonG * reducedMass * totalMass / r.magnitude;
-        angularMomentum = reducedMass * Vector3.Cross(r, v);
+        angularMomentum = reducedMass * Vector3.Cross(r, v);  // OR V CROSS R ??? 
         magnitudeL = angularMomentum.magnitude;
 
         // Compute orbital properties
@@ -321,7 +305,7 @@ public class TwoBodySimulation : Simulation
         totalMass = mass1 + mass2;
         initPositionCM = (mass1 * initPosition1 + mass2 * initPosition2) / totalMass;
         initVelocityCM = (mass1 * initVelocity1 + mass2 * initVelocity2) / totalMass;
-        Vector3 deltaPosition = transform.position - initPositionCM;
+        Vector3 deltaPosition = initPositionCM - transform.position;
         transform.position = initPositionCM;
         body1.localPosition = mass2 / M * r;
         body2.localPosition = -mass1 / M * r;
@@ -336,11 +320,11 @@ public class TwoBodySimulation : Simulation
             prefabs.orbitalPlaneDark.Translate(deltaPosition);
         }
 
-        // Local coordinate system
-        Vector3 zHat = -angularMomentum.normalized;
-        Vector3 xHat = Quaternion.AngleAxis(-initTheta, zHat) * (-r.normalized);
-        Vector3 yHat = Vector3.Cross(zHat, xHat);
+        DrawOrbits();
+    }
 
+    private void DrawOrbits()
+    {
         int numSteps = 360;
         float a = SemiMajorAxis;
         float e = Eccentricity;
@@ -375,6 +359,21 @@ public class TwoBodySimulation : Simulation
             prefabs.orbit2.positionCount = numSteps;
             prefabs.orbit2.SetPositions(positions);
             prefabs.orbit2.loop = true;
+        }
+
+        if (prefabs.orbit3)
+        {
+            Vector3[] positions = new Vector3[numSteps];
+            for (int i = 0; i < numSteps; i++)
+            {
+                float theta = i * 2f * Mathf.PI / numSteps;
+                float r = a * (1f - e * e) / (1f + e * Mathf.Cos(theta));
+                positions[i] = r * (Mathf.Cos(theta) * xHat + Mathf.Sin(theta) * yHat);
+            }
+
+            prefabs.orbit3.positionCount = numSteps;
+            prefabs.orbit3.SetPositions(positions);
+            prefabs.orbit3.loop = true;
         }
     }
 }

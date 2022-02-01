@@ -609,7 +609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   paused: 0
   newtonG: 150
-  numSubsteps: 200
+  numSubsteps: 20
   mass1: 0.8
   mass2: 1.2
   initPosition1: {x: -4.8, y: 0, z: 0}
@@ -854,13 +854,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   paused: 0
   newtonG: 100
-  numSubsteps: 200
+  numSubsteps: 10
   mass1: 100
   mass2: 1
   initPosition1: {x: -1, y: 0, z: 0}
   initPosition2: {x: 50, y: 0, z: 0}
-  initVelocity1: {x: 0, y: 0.1, z: 0}
-  initVelocity2: {x: 0, y: -10, z: 0}
+  initVelocity1: {x: 0, y: -0.1, z: 0}
+  initVelocity2: {x: 0, y: 10, z: 0}
   oneBodySim: {fileID: 0}
   oneBodyOffset: {x: 0, y: 0, z: 0}
   r: {x: -2, y: 0, z: 0}
@@ -3514,9 +3514,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: Although this statement is not absolutely true, given the fact that the
-    sun is not infintely massive, it is a <i>very</i> good approximation. Jupiter,
-    with 2.5 times the mass of all other planets in the solar system combined, is
-    still only about 0.1% the mass of the sun.
+    sun is not infinitely massive, it is a <i>very</i> good approximation. Jupiter,
+    with 2.5 times the mass of all other planets in the solar system combined, still
+    contains only about 0.1% the mass of the sun.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 350cfcf20da78478f9197161ac83b480, type: 2}
   m_sharedMaterial: {fileID: -1129015340585624399, guid: 350cfcf20da78478f9197161ac83b480,
@@ -4071,11 +4071,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   paused: 0
   newtonG: 150
-  numSubsteps: 20
+  numSubsteps: 10
   mass1: 1
   mass2: 1
-  initPosition1: {x: -4, y: 0, z: 0}
-  initPosition2: {x: 4, y: 0, z: 0}
+  initPosition1: {x: -4.1, y: 0, z: 0}
+  initPosition2: {x: 3.9, y: 0, z: 0}
   initVelocity1: {x: 0, y: 2.2, z: 0}
   initVelocity2: {x: 0, y: -2.2, z: 0}
   oneBodySim: {fileID: 0}
@@ -5277,7 +5277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a45589bcd46594f239ab7b7aa506c2bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoPlay: 1
+  autoPlay: 0
   simulation: {fileID: 239421281}
   originIsDraggable: 0
   originPosition: {x: 0, y: 0, z: 0}
@@ -5289,8 +5289,8 @@ MonoBehaviour:
   positionVector3White: 0
   positionVector3Black: 1
   positionVectorCOM: 0
-  orbit1: 0
-  orbit2: 0
+  orbit1: 1
+  orbit2: 1
   orbit3: 0
   forceVector1: 0
   forceVector2: 0
@@ -5406,7 +5406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a45589bcd46594f239ab7b7aa506c2bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoPlay: 1
+  autoPlay: 0
   simulation: {fileID: 239421281}
   originIsDraggable: 0
   originPosition: {x: 0, y: 0, z: 0}
@@ -5418,8 +5418,8 @@ MonoBehaviour:
   positionVector3White: 0
   positionVector3Black: 0
   positionVectorCOM: 0
-  orbit1: 0
-  orbit2: 0
+  orbit1: 1
+  orbit2: 1
   orbit3: 0
   forceVector1: 0
   forceVector2: 0

@@ -6,6 +6,7 @@ public class OrbitSlideController : SimulationSlideController
     [SerializeField] private bool positionVector;
     [SerializeField] private bool orbit;
     [SerializeField] private bool axes;
+    [SerializeField] private bool semiMajorAxis;
 
     private OrbitPrefabs prefabs;
 
@@ -28,5 +29,6 @@ public class OrbitSlideController : SimulationSlideController
         prefabs.SetPositionVectorVisibility(positionVector);
         prefabs.SetOrbitVisibility(orbit);
         prefabs.SetAxesVisibility(axes);
+        prefabs.SetSemiMajorAxisVectorVisibility(semiMajorAxis);
     }
 }

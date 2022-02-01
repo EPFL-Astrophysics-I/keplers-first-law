@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public class OrbitSimulation : Simulation
 {
@@ -6,6 +7,10 @@ public class OrbitSimulation : Simulation
 
     public TwoBodySimulation twoBodySim;
     public float radiusScale = 1;
+    public bool reverseTheta = false;
+
+    [Header("UI Displays")]
+    public TextMeshProUGUI thetaDisplay;
 
     private Camera mainCamera;
 
@@ -48,6 +53,16 @@ public class OrbitSimulation : Simulation
             prefabs.orbit.SetPositions(positions);
             prefabs.orbit.loop = true;
         }
+
+        if (prefabs.semiMajorAxisVector)
+        {
+            float a = twoBodySim.SemiMajorAxis;
+            float e = twoBodySim.Eccentricity;
+            Vector3 tailPosition = transform.position + a * e * Vector3.right;
+            Vector3 headPosition = tailPosition + 0.97f * a * Vector3.right;  // Why do we need this fudge factor ?!
+            prefabs.semiMajorAxisVector.SetPositions(tailPosition, headPosition);
+            prefabs.semiMajorAxisVector.Redraw();
+        }
     }
 
     private void Update()
@@ -61,11 +76,17 @@ public class OrbitSimulation : Simulation
         if (prefabs.positionVector && twoBodySim)
         {
             float r = twoBodySim.r.magnitude;
-            float theta = -twoBodySim.theta;
+            float theta = reverseTheta ? -twoBodySim.theta : twoBodySim.theta;
 
             Vector3 position = radiusScale * r * (Mathf.Cos(theta) * Vector3.right + Mathf.Sin(theta) * Vector3.up);
             prefabs.positionVector.SetPositions(Vector3.zero, position);
             prefabs.positionVector.Redraw();
+        }
+
+        if (thetaDisplay)
+        {
+            float theta = reverseTheta ? -twoBodySim.theta : twoBodySim.theta;
+            thetaDisplay.text = (1 - theta / Mathf.PI).ToString("0.00");
         }
     }
 

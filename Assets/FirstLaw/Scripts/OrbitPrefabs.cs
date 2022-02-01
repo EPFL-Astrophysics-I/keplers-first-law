@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class OrbitPrefabs : MonoBehaviour
 {
@@ -8,10 +6,12 @@ public class OrbitPrefabs : MonoBehaviour
     [SerializeField] private GameObject positionVectorPrefab;
     [SerializeField] private GameObject orbitPrefab;
     [SerializeField] private GameObject axesPrefab;
+    [SerializeField] private GameObject semiMajorAxisPrefab;
 
     [HideInInspector] public Vector positionVector;
     [HideInInspector] public LineRenderer orbit;
     [HideInInspector] public Transform axes;
+    [HideInInspector] public Vector semiMajorAxisVector;
 
     public void InstantiateAllPrefabs()
     {
@@ -33,6 +33,13 @@ public class OrbitPrefabs : MonoBehaviour
         {
             axes = Instantiate(axesPrefab, transform).transform;
             axes.name = "Axes";
+        }
+
+        if (semiMajorAxisPrefab)
+        {
+            semiMajorAxisVector = Instantiate(semiMajorAxisPrefab, transform).GetComponent<Vector>();
+            semiMajorAxisVector.SetPositions(Vector3.zero, Vector3.zero);
+            semiMajorAxisVector.name = "Semi-Major Axis Vector";
         }
     }
 
@@ -58,6 +65,14 @@ public class OrbitPrefabs : MonoBehaviour
         if (axes)
         {
             axes.gameObject.SetActive(visible);
+        }
+    }
+
+    public void SetSemiMajorAxisVectorVisibility(bool visible)
+    {
+        if (semiMajorAxisVector)
+        {
+            semiMajorAxisVector.gameObject.SetActive(visible);
         }
     }
 }

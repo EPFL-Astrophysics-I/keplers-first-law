@@ -116,16 +116,6 @@ public class TwoBodySimulation : Simulation
         yHat = Vector3.Cross(zHat, xHat);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(transform.position, zHat);
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position, xHat);
-        Gizmos.color = Color.green;
-        Gizmos.DrawRay(transform.position, yHat);
-    }
-
     private void Start()
     {
         Vector3 positionCM = transform.position;
@@ -175,13 +165,6 @@ public class TwoBodySimulation : Simulation
         // Move the simulation to the new CM position
         transform.position = CenterOfMassPosition(time);
 
-        // Solve the equation of motion for r
-        //float substep = Time.fixedDeltaTime / numSubsteps;
-        //for (int i = 1; i <= numSubsteps; i++)
-        //{
-        //    StepForward(substep);
-        //}
-
         // Bound orbits
         if (energy < 0)
         {
@@ -191,7 +174,6 @@ public class TwoBodySimulation : Simulation
             {
                 StepForwardThetaR(substep);
             }
-            
         }
         else
         {
@@ -270,15 +252,11 @@ public class TwoBodySimulation : Simulation
             period = 2 * Mathf.PI * Mathf.Sqrt(a * a * a / newtonG / totalMass);
 
             float e = eccentricity;
-            initTheta = Mathf.Acos(((a * (1f - e * e) / r.magnitude) - 1f) / e);
+            // Avoid NANs by making sure the argument of arccos is strictly between -1 and 1
+            float arg = Mathf.Clamp(((a * (1f - e * e) / r.magnitude) - 1f) / e, -1f, 1f);
+            initTheta = Mathf.Acos(arg);
             theta = initTheta;
         }
-
-        //Debug.Log("Period is " + Period + " s");
-        //Debug.Log("CM is at " + initPositionCM);
-        //Debug.Log("CM v is " + initVelocityCM);
-        //Debug.Log("e is " + eccentricity);
-        //Debug.Log("theta0 is " + initTheta * Mathf.Rad2Deg);
     }
 
     // Center of mass position at any time

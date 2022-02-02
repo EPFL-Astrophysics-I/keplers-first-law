@@ -35,7 +35,7 @@ public class EllipseSimulation : Simulation
     {
         if (transform.rotation != mainCamera.transform.rotation)
         {
-            Debug.Log("Rotating Ellipse Simulation");
+            //Debug.Log("Rotating Ellipse Simulation");
             transform.rotation = mainCamera.transform.rotation;
         }
     }

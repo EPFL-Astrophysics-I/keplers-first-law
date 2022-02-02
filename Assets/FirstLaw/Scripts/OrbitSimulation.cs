@@ -69,7 +69,7 @@ public class OrbitSimulation : Simulation
     {
         if (transform.rotation != mainCamera.transform.rotation)
         {
-            Debug.Log("Rotating Orbit Simulation");
+            //Debug.Log("Rotating Orbit Simulation");
             transform.rotation = mainCamera.transform.rotation;
         }
 

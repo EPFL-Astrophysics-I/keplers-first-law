@@ -233,7 +233,7 @@ public class TwoBodySimulation : Simulation
         // Compute conserved quantities (in CM frame)
         reducedMass = mass1 * mass2 / totalMass;
         energy = 0.5f * reducedMass * v.sqrMagnitude - newtonG * reducedMass * totalMass / r.magnitude;
-        angularMomentum = reducedMass * Vector3.Cross(r, v);  // OR V CROSS R ??? 
+        angularMomentum = reducedMass * Vector3.Cross(r, v);
         magnitudeL = angularMomentum.magnitude;
 
         // Compute orbital properties

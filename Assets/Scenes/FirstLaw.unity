@@ -933,7 +933,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 89.9, y: -43.55}
+  m_AnchoredPosition: {x: 37.9, y: -66.3}
   m_SizeDelta: {x: 96, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &168428856
@@ -1239,9 +1239,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Prenons le cas o\xF9 l\u2019un des corps est largement plus massif que
-    l\u2019autre. Utilisez le curseur ci-dessus pour changer le rapport de masse.
-    Comment changent-elles les orbites et le centre de masse?"
+  m_text: "Prenons le cas o\xF9 l\u2019un des deux corps est largement plus massif
+    que l\u2019autre. Utilisez le curseur pour changer leur rapport de masse. Comment
+    sont modifi\xE9s les orbites et la position du centre de masse ?"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 350cfcf20da78478f9197161ac83b480, type: 2}
   m_sharedMaterial: {fileID: -1129015340585624399, guid: 350cfcf20da78478f9197161ac83b480,
@@ -1482,7 +1482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoPlay: 1
   simulation: {fileID: 1378605287}
-  positionVector: 1
+  positionVector: 0
   orbit: 1
   axes: 1
   semiMajorAxis: 1
@@ -1833,7 +1833,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2043,7 +2043,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.040000003}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9.8, y: 17.01}
+  m_AnchoredPosition: {x: 101.5, y: 17.01}
   m_SizeDelta: {x: 96, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &291291567
@@ -2406,7 +2406,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -39.6, y: -38.5}
+  m_AnchoredPosition: {x: 140, y: -21.33}
   m_SizeDelta: {x: 96, y: 96}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &346459037
@@ -2480,7 +2480,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 116.4, y: -84.38}
+  m_AnchoredPosition: {x: -36, y: -84.38}
   m_SizeDelta: {x: 256, y: 208}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &360022143
@@ -2776,7 +2776,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.04, y: -66.2}
+  m_AnchoredPosition: {x: -27.5, y: -88.94}
   m_SizeDelta: {x: 96, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &470466020
@@ -2923,7 +2923,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -19.84, y: -66.2}
+  m_AnchoredPosition: {x: 48, y: -66.2}
   m_SizeDelta: {x: 96, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &539061174
@@ -3018,8 +3018,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundColor: {r: 0, g: 0, b: 0, a: 1}
   colorTransitionTime: 0.5
-  position: {x: 16, y: -160, z: -48}
-  lookAt: {x: 16, y: -8, z: 0}
+  position: {x: 16, y: -165, z: -48}
+  lookAt: {x: 16, y: -12, z: 0}
   moveTime: 1.5
   orthographic: 0
   fieldOfView: 20
@@ -3529,7 +3529,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -128.8, y: 70.01}
+  m_AnchoredPosition: {x: -115.04, y: 70.01}
   m_SizeDelta: {x: 96, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &592689599
@@ -3640,7 +3640,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 100, y: -60}
-  m_SizeDelta: {x: 300, y: 200}
+  m_SizeDelta: {x: 308, y: 200}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &668300564
 GameObject:
@@ -3855,7 +3855,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The orbit of a planet is an ellipse with the sun at one focus.
+  m_text: The orbit of a planet is an ellipse with the Sun at one focus.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 63ff8dedd5ec54b0fa1dad1ece359f72, type: 2}
   m_sharedMaterial: {fileID: -1557034820810180391, guid: 63ff8dedd5ec54b0fa1dad1ece359f72,
@@ -3950,7 +3950,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &687332730
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3989,9 +3989,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Cette loi n\u2019est cependant pas tout \xE0 fait vrai, vu que le Soleil
-    n\u2019a pas une masse infinie, mais elle est quand-m\xEAme une tr\xE8s bonne
-    approximation. Jupiter, \xE0 2,5 fois la masse de toutes les autres plan\xE8tes
+  m_text: "Cette loi n\u2019est cependant pas tout \xE0 fait exacte, vu que le Soleil
+    n\u2019a pas une masse infinie, mais elle reste une tr\xE8s bonne approximation.
+    Par exemple, Jupiter, dont la masse est 2,5 fois celle de toutes les autres plan\xE8tes
     r\xE9unies, ne poss\xE8de que 0,1% de la masse du Soleil."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 350cfcf20da78478f9197161ac83b480, type: 2}
@@ -4317,8 +4317,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Telle est la situation dans le syst\xE8me solaire, o\xF9 le Soleil est
-    beaucoup plus massif que tous les autres astres. La premi\xE8re loi de Kepler
-    est donc :"
+    beaucoup plus massif que toutes les autres plan\xE8tes. Voici donc la premi\xE8re
+    loi de Kepler :"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 350cfcf20da78478f9197161ac83b480, type: 2}
   m_sharedMaterial: {fileID: -1129015340585624399, guid: 350cfcf20da78478f9197161ac83b480,
@@ -4453,8 +4453,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Les deux autres lois de Kepler traitent de certaines propri\xE9t\xE9s
-    sp\xE9ciales des orbites plan\xE9taires. D\xE9couvrez-les dans les autres apps
-    du chapitre ci-dessous."
+    particuli\xE8res des orbites plan\xE9taires, que vous pouvez d\xE9couvrir dans
+    les apps ci-dessous."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 350cfcf20da78478f9197161ac83b480, type: 2}
   m_sharedMaterial: {fileID: -1129015340585624399, guid: 350cfcf20da78478f9197161ac83b480,
@@ -4794,7 +4794,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &835631015
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4834,10 +4834,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Si le syst\xE8me est li\xE9 par la gravit\xE9, on peut montrer\u2014apr\xE8s
-    un certain effort math\xE9matique\u2014que le vecteur de la distance     d\xE9crit
-    une ellipse. Dans le cas non li\xE9, son chemin serait l\u2019une des autres
-    sections coniques : parabole ou hyperbole."
+  m_text: "Apr\xE8s quelques manipulations math\xE9matiques, on peut montrer que
+    le vecteur distance       d\xE9crit toujours une conique. Si le syst\xE8me est
+    gravitationnellement li\xE9, comme montr\xE9 ici, le chemin est une ellipse.
+    Si le syst\xE8me n\u2019est pas li\xE9, il serait l\u2019une des autres coniques
+    : parabole ou hyperbole."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 350cfcf20da78478f9197161ac83b480, type: 2}
   m_sharedMaterial: {fileID: -1129015340585624399, guid: 350cfcf20da78478f9197161ac83b480,
@@ -5380,7 +5381,7 @@ GameObject:
   - component: {fileID: 919360643}
   - component: {fileID: 919360642}
   m_Layer: 5
-  m_Name: r_theta
+  m_Name: theta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5402,8 +5403,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 105.1, y: 23.3}
-  m_SizeDelta: {x: 288, y: 176}
+  m_AnchoredPosition: {x: 120.4, y: 27.33}
+  m_SizeDelta: {x: 96, y: 144}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &919360642
 MonoBehaviour:
@@ -5424,7 +5425,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 64789cdce2bfc4e1cbb5eeb06d127599, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 751167905719f4570b9713433c3c1eaa, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -5499,10 +5500,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Rappelez-vous que dans un autre rep\xE8re (toujours inertiel), ce plan
-    pourrait se d\xE9placer avec un vecteur de vitesse constant. Nous avons choisi
-    le syst\xE8me de r\xE9f\xE9rence du <color=red>centre de masse</color> ici tel
-    que     reste fixe."
+  m_text: "Rappelez-vous que dans un autre r\xE9f\xE9rentiel (qui est toujours inertiel),
+    ce plan pourrait se d\xE9placer avec une vitesse constante. Ici, nous avons choisi
+    le r\xE9f\xE9rentiel du <color=red>centre de masse</color> tel que       reste
+    fixe."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 350cfcf20da78478f9197161ac83b480, type: 2}
   m_sharedMaterial: {fileID: -1129015340585624399, guid: 350cfcf20da78478f9197161ac83b480,
@@ -5542,7 +5543,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 10
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -5965,8 +5966,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -110}
-  m_SizeDelta: {x: 500, y: 40}
+  m_AnchoredPosition: {x: 70, y: -210}
+  m_SizeDelta: {x: 304.5, y: 40}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &1008646027
 GameObject:
@@ -6222,7 +6223,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1064795975
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6265,8 +6266,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: 'It is convenient to write the equation of an ellipse in polar coordinates
-    as a function          . It depends on two parameters that define the precise
-    shape of the orbit: the semi-major axis    and the eccentricity    .'
+    as a function of the angle  . It depends on two parameters that define the precise
+    shape of the orbit: the semi-major axis  and the eccentricity    .'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 350cfcf20da78478f9197161ac83b480, type: 2}
   m_sharedMaterial: {fileID: -1129015340585624399, guid: 350cfcf20da78478f9197161ac83b480,
@@ -6361,7 +6362,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1071047088
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6404,9 +6405,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Il est pratique d\u2019\xE9crire l\u2019\xE9quation d\u2019une ellipse
-    en coordonn\xE9es polaires par une fonction          . Elle d\xE9pend de deux
-    param\xE8tres qui d\xE9crivent la forme pr\xE9cise de l\u2019orbite : le demi-grand
-    axe    et l\u2019excentricit\xE9    ."
+    en coordonn\xE9es polaires, en fonction de l\u2019angle     . Elle d\xE9pend
+    de deux param\xE8tres qui d\xE9crivent enti\xE8rement la forme de l\u2019orbite
+    : le demi-grand axe     et l\u2019excentricit\xE9    ."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 350cfcf20da78478f9197161ac83b480, type: 2}
   m_sharedMaterial: {fileID: -1129015340585624399, guid: 350cfcf20da78478f9197161ac83b480,
@@ -6804,7 +6805,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 12.7, y: -38.7}
+  m_AnchoredPosition: {x: -2.5, y: -38.6}
   m_SizeDelta: {x: 96, y: 96}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1174067656
@@ -7437,7 +7438,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -166.6, y: 69.93}
+  m_AnchoredPosition: {x: -157.01, y: 69.93}
   m_SizeDelta: {x: 96, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1328892433
@@ -8123,7 +8124,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -265.9, y: -16}
+  m_AnchoredPosition: {x: -262.66, y: -17.13}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1462811166
@@ -8138,7 +8139,7 @@ GameObject:
   - component: {fileID: 1462811169}
   - component: {fileID: 1462811168}
   m_Layer: 5
-  m_Name: r_theta
+  m_Name: theta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8160,8 +8161,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 92.85, y: 23.3}
-  m_SizeDelta: {x: 288, y: 176}
+  m_AnchoredPosition: {x: -66.8, y: 4.4}
+  m_SizeDelta: {x: 96, y: 144}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1462811168
 MonoBehaviour:
@@ -8182,7 +8183,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 64789cdce2bfc4e1cbb5eeb06d127599, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 751167905719f4570b9713433c3c1eaa, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -8808,12 +8809,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Les param\xE8tres       et       peuvent \xEAtre \xE9crites en termes
-    des conditions initiales, c\u2019est-\xE0-dire la masse, la position, et la vitesse
-    de chaque corps. En cas d\u2019int\xE9r\xEAt, vous pourriez essayer vous-m\xEAme
-    de trouver les expressions. La simulation ci-dessous permet d\u2019explorer comment
-    change une orbite en fonction du changement d\u2019excentricit\xE9 et de demi-grand
-    axe."
+  m_text: "Les param\xE8tres     et     peuvent \xEAtre exprim\xE9s en termes des
+    conditions initiales, c\u2019est-\xE0-dire la masse, la position, et la vitesse
+    de chaque corps. Vous pourriez tout \xE0 fait tenter de retrouver ces expressions
+    par vous-m\xEAme. La simulation ci-dessous permet d\u2019explorer comment l\u2019excentricit\xE9
+    et le demi-grand axe changent la forme de l\u2019orbite."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 350cfcf20da78478f9197161ac83b480, type: 2}
   m_sharedMaterial: {fileID: -1129015340585624399, guid: 350cfcf20da78478f9197161ac83b480,
@@ -9318,7 +9318,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1617368250
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9358,10 +9358,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "With some mathematical effort, one can show that if the system is bound
-    gravitationally, the vector difference    \nbetween the two bodies traces out
-    an ellipse. In unbound interactions, the path will be one of the other conic
-    sections: parabola or hyperbola."
+  m_text: 'After some mathematical effort, one can show that the vector distance       
+    always traces out a conic section. If the system is gravitationally bound, as
+    the two bodies shown here, the path is an ellipse. In unbound interactions, it
+    will be one of the other conic sections: parabola or hyperbola.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 350cfcf20da78478f9197161ac83b480, type: 2}
   m_sharedMaterial: {fileID: -1129015340585624399, guid: 350cfcf20da78478f9197161ac83b480,
@@ -10039,7 +10039,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -116.2, y: -52.97}
+  m_AnchoredPosition: {x: 25.2, y: -52.97}
   m_SizeDelta: {x: 256, y: 176}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1795140724
@@ -10170,7 +10170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1823359896
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10211,8 +10211,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Chaque corps d\xE9crit donc une ellipse lui-m\xEAme, puisque les rayons
-    vecteurs sont des versions \xE0 l\u2019\xE9chelle du vecteur    . Avec l\u2019origine
-    \xE0 la position du <color=red>centre de masse</color>, nous pouvons \xE9crire"
+    vecteurs sont en r\xE9alit\xE9 des versions plus petites du vecteur     . Avec
+    le <color=red>centre de masse</color> plac\xE9 \xE0 l\u2019origine, nous pouvons
+    \xE9crire"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 350cfcf20da78478f9197161ac83b480, type: 2}
   m_sharedMaterial: {fileID: -1129015340585624399, guid: 350cfcf20da78478f9197161ac83b480,
@@ -10549,7 +10550,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1873429385}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -10775,7 +10776,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.040000003}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -67.3, y: 21.5}
+  m_AnchoredPosition: {x: -7.7, y: 44.5}
   m_SizeDelta: {x: 96, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1988834910
@@ -10832,7 +10833,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2016040277
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11160,7 +11161,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 15.7, y: -70.1}
+  m_AnchoredPosition: {x: -132.4, y: -70}
   m_SizeDelta: {x: 256, y: 176}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2056446989
@@ -11234,7 +11235,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 104.75, y: -43.55}
+  m_AnchoredPosition: {x: -90.94, y: -66.17}
   m_SizeDelta: {x: 96, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2092439779
@@ -11308,7 +11309,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 93.7, y: -101.6}
+  m_AnchoredPosition: {x: -63.9, y: -101.6}
   m_SizeDelta: {x: 256, y: 208}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2092780129
@@ -11382,7 +11383,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.040000003}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 146.4, y: 44.4}
+  m_AnchoredPosition: {x: 90.2, y: 67.02}
   m_SizeDelta: {x: 96, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2116012223
@@ -11612,7 +11613,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -60}
-  m_SizeDelta: {x: 330, y: 50}
+  m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2560800832394825379
 GameObject:
@@ -11962,7 +11963,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "les plan\xE8tes d\xE9crivent des orbites en forme d'ellipses"
+  m_text: "les orbites des plan\xE8tes sont des ellipses"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 350cfcf20da78478f9197161ac83b480, type: 2}
   m_sharedMaterial: {fileID: -1129015340585624399, guid: 350cfcf20da78478f9197161ac83b480,
@@ -12714,9 +12715,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Nous avons vu que gr\xE2ce \xE0 la conservation du <color=#83E1B5>moment
-    cin\xE9tique</color>, le mouvement de deux corps gravitants reste toujours dans
-    un plan par rapport au <color=red>centre de masse</color>."
+  m_text: "Nous avons vu, gr\xE2ce \xE0 la conservation du <color=#83E1B5>moment
+    cin\xE9tique</color>, que le mouvement de deux corps gravitants reste toujours
+    dans un plan par rapport au <color=red>centre de masse</color>."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 350cfcf20da78478f9197161ac83b480, type: 2}
   m_sharedMaterial: {fileID: -1129015340585624399, guid: 350cfcf20da78478f9197161ac83b480,
@@ -12942,8 +12943,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 171.2, y: 43.8}
-  m_SizeDelta: {x: 274, y: 156}
+  m_AnchoredPosition: {x: 171.2, y: 31}
+  m_SizeDelta: {x: 306, y: 141.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &9091704076527823818
 GameObject:
@@ -13039,9 +13040,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Vous avez peut-\xEAtre remarqu\xE9 que cette equation ne traite pas de
-    l\u2019evolution temporelle du rayon     . Il faut la solution\n     pour d\xE9crire
-    compl\xE8tement le mouvement de la plan\xE8te, \xE0 laquelle nous pouvons arriver
-    par relier directement la vitesse angulaire           au moment cin\xE9tique."
+    l\u2019evolution temporelle du rayon     . Pour cela, il faut aussi une \xE9quation
+    pour     pour d\xE9crire enti\xE8rement le mouvement de la plan\xE8te, que nous
+    pouvons obtenir en reliant la vitesse angulaire           au moment cin\xE9tique."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 350cfcf20da78478f9197161ac83b480, type: 2}
   m_sharedMaterial: {fileID: -1129015340585624399, guid: 350cfcf20da78478f9197161ac83b480,
@@ -13150,7 +13151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!222 &9091704077083255721
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13179,9 +13180,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "You might have noticed that this equation does not explicitly tell us
-    how the radius   evolves with time. To describe the planet's motion fully, we
-    must also solve for        , which can be done by relating the angular speed
-    \ndirectly to the (conserved) angular momentum."
+    how the radius                         evolves with time. To describe the planet's
+    motion fully, we must also obtain a solution for\n     , which can be solved
+    by relating the angular speed            directly to the (conserved) angular
+    momentum."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 350cfcf20da78478f9197161ac83b480, type: 2}
   m_sharedMaterial: {fileID: -1129015340585624399, guid: 350cfcf20da78478f9197161ac83b480,
@@ -13290,7 +13292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &9091704077117666182
 MonoBehaviour:
   m_ObjectHideFlags: 0
